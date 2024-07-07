@@ -1,0 +1,55 @@
+@Restaurants.API_HostAddress = http://localhost:5190
+
+GET {{Restaurants.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
+POST {{Restaurants.API_HostAddress}}/weatherforecast/generate
+Content-Type: application/json
+
+{
+  "NbResult": 6,
+  "MinTemp": 0,
+  "MaxTemp": 33
+}
+
+###
+GET http://localhost:5190/api/Restaurants
+
+###
+GET http://localhost:5190/api/restaurants/5
+
+###
+POST http://localhost:5190/api/restaurants
+Content-Type: application/json
+
+{
+  "name": "Restaurant 1",
+  "Description": "Description 1",
+  "Category": "Category 1",
+  "HasDelivery": true,
+  "ContactEmail": "ave@123.com",
+  "ContactNumber": "123456789",
+  "Street": "Street 1",
+  "City": "City 1",
+  "PostalCode": "123456"
+  
+}
+
+###
+GET http://localhost:5190/api/restaurants/7
+
+###
+POST http://localhost:5190/api/restaurants
+Content-Type: application/json
+
+{
+    "name": "Res",
+    "PostalCode": "123456",
+    "Street": "Street 1",
+    "City": "City 1",
+    "Description": "Description 1",
+    "Category": "Vegan"
+    
+    
+}
