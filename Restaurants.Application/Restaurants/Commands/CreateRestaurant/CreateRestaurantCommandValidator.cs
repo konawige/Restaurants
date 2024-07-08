@@ -1,13 +1,12 @@
 using FluentValidation;
-using Restaurants.Application.Restaurants.DTOs;
 
-namespace Restaurants.Application.Validators;
+namespace Restaurants.Application.Restaurants.Commands.CreateRestaurant;
 
-public class CreateRestaurantDtoValidator: AbstractValidator<CreateRestaurantDto>
+public class CreateRestaurantCommandValidator: AbstractValidator<CreateRestaurantCommand>
 {
     private readonly List<string> _validCategories = ["Fast Food", "Traditional", "Italian", "Chinese", "Indian", "Mexican", "Vegetarian", "Vegan"];
 
-    public CreateRestaurantDtoValidator()
+    public CreateRestaurantCommandValidator()
     {
         RuleFor(x => x.Category).Must(x => _validCategories.Contains(x)).WithMessage("Invalid category");
         RuleFor(x => x.Name).NotEmpty();

@@ -17,7 +17,7 @@ Content-Type: application/json
 GET http://localhost:5190/api/Restaurants
 
 ###
-GET http://localhost:5190/api/restaurants/5
+GET http://localhost:5190/api/restaurants/8
 
 ###
 POST http://localhost:5190/api/restaurants
@@ -26,18 +26,18 @@ Content-Type: application/json
 {
   "name": "Restaurant 1",
   "Description": "Description 1",
-  "Category": "Category 1",
+  "Category": "Vegan",
   "HasDelivery": true,
   "ContactEmail": "ave@123.com",
   "ContactNumber": "123456789",
   "Street": "Street 1",
   "City": "City 1",
-  "PostalCode": "123456"
+  "PostalCode": "12-456"
   
 }
 
 ###
-GET http://localhost:5190/api/restaurants/7
+GET http://localhost:5190/api/restaurants/5
 
 ###
 POST http://localhost:5190/api/restaurants
@@ -52,4 +52,19 @@ Content-Type: application/json
     "Category": "Vegan"
     
     
+}
+
+###
+DELETE http://localhost:5190/api/restaurants/7
+
+###
+PUT http://localhost:5190/api/restaurants/5
+Content-Type: application/json
+
+{
+  
+  "hasDelivery": true
+  
+
+
 }
