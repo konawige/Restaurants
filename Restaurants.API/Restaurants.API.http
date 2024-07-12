@@ -37,7 +37,7 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:5190/api/restaurants/5
+GET http://localhost:5190/api/restaurants/500
 
 ###
 POST http://localhost:5190/api/restaurants
@@ -45,11 +45,13 @@ Content-Type: application/json
 
 {
     "name": "Res",
-    "PostalCode": "123456",
+    "PostalCode": "12-456",
     "Street": "Street 1",
     "City": "City 1",
     "Description": "Description 1",
-    "Category": "Vegan"
+    "Category": "Vegan",
+    "HasDelivery": true,
+    "ContactEmail": "willy@123.com"
     
     
 }
@@ -63,7 +65,7 @@ Content-Type: application/json
 
 {
   
-  "hasDelivery": true
+  "hasDelivery": false
   
 
 

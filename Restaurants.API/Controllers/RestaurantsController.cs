@@ -1,4 +1,5 @@
 using MediatR;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Restaurants.Application.Restaurants;
 using Restaurants.Application.Restaurants.Commands.CreateRestaurant;
@@ -14,19 +15,16 @@ namespace Restaurants.API.Controllers;
 public class RestaurantsController(IMediator mediator) : ControllerBase
 {
     [HttpGet]
+    [ProducesResponseType(typeof(IEnumerable<RestaurantDto>), StatusCodes.Status200OK)]
     public async Task<IActionResult> GetAll()
     {
         var restaurants = await mediator.Send(new GetAllRestaurantsQuery());
         return Ok(restaurants);
     }
     [HttpGet("{id:int}")]
-    public async Task<IActionResult> GetById([FromRoute] int id) 
+    public async Task<ActionResult<RestaurantDto>> GetById([FromRoute] int id) 
     {
         var restaurant = await mediator.Send(new GetRestaurantByIdQuery(id));
-        if (restaurant is null)
-        {
-            return NotFound();
-        }
         return Ok(restaurant);
     }
     [HttpPost]
@@ -40,11 +38,8 @@ public class RestaurantsController(IMediator mediator) : ControllerBase
     public async Task<IActionResult> UpdateRestaurant([FromRoute] int id, [FromBody] UpdateRestaurantCommand command)
     {
         command.Id = id;
-        var result  = await mediator.Send(command);
-        if (!result)
-        {
-            return NotFound();
-        }
+        await mediator.Send(command);
+       
         // return the updated entity
         
         var restaurant = await mediator.Send(new GetRestaurantByIdQuery(id));
@@ -52,13 +47,13 @@ public class RestaurantsController(IMediator mediator) : ControllerBase
     }
     
     [HttpDelete("{id:int}")]
+    [ProducesResponseType( StatusCodes.Status204NoContent)]
+    [ProducesResponseType( StatusCodes.Status404NotFound)
+    ]
     public async Task<IActionResult> DeleteRestaurant([FromRoute] int id) 
     {
-        var result = await mediator.Send(new DeleteRestaurantCommand(id));
-        if (result is false)
-        {
-            return NotFound();
-        }
-        return Ok();
+        await mediator.Send(new DeleteRestaurantCommand(id));
+        //return 204 No Content
+        return NoContent();
     }
 }
