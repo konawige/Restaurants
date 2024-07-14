@@ -64,9 +64,8 @@ PUT http://localhost:5190/api/restaurants/5
 Content-Type: application/json
 
 {
-  
   "hasDelivery": false
-  
-
-
 }
+
+###
+POST http://localhost:5190/api/restaurant/500/dishes

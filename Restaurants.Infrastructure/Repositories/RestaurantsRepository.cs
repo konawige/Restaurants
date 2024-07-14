@@ -43,5 +43,9 @@ internal class RestaurantsRepository(RestaurantsDbContext dbContext):
     }
 
     public Task SaveChanges() => dbContext.SaveChangesAsync();
-    
+    public Task DeleteDishesAsync(Restaurant restaurant)
+    {
+        dbContext.Dishes.RemoveRange(restaurant.Dishes);
+        return dbContext.SaveChangesAsync();
+    }
 }
